@@ -6,10 +6,10 @@ package sr25519
 import (
 	"crypto/rand"
 
-	"github.com/ChainSafe/chainbridge-utils/crypto"
 	"github.com/centrifuge/go-substrate-rpc-client/v3/signature"
 	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/tearust/chainbridge-utils/crypto"
 )
 
 var _ crypto.Keypair = &Keypair{}
@@ -18,7 +18,7 @@ type Keypair struct {
 	keyringPair *signature.KeyringPair
 }
 
-func GenerateKeypair(network string) (*Keypair, error) {
+func GenerateKeypair(network uint8) (*Keypair, error) {
 	data := make([]byte, 32)
 	_, err := rand.Read(data)
 	if err != nil {
@@ -27,7 +27,7 @@ func GenerateKeypair(network string) (*Keypair, error) {
 	return NewKeypairFromSeed("//"+hexutil.Encode(data), network)
 }
 
-func NewKeypairFromSeed(seed, network string) (*Keypair, error) {
+func NewKeypairFromSeed(seed string, network uint8) (*Keypair, error) {
 	kp, err := signature.KeyringPairFromSecret(seed, network)
 	return &Keypair{&kp}, err
 }

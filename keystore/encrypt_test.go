@@ -11,8 +11,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ChainSafe/chainbridge-utils/crypto/secp256k1"
-	"github.com/ChainSafe/chainbridge-utils/crypto/sr25519"
+	"github.com/tearust/chainbridge-utils/crypto/secp256k1"
+	"github.com/tearust/chainbridge-utils/crypto/sr25519"
 )
 
 func TestEncryptAndDecrypt(t *testing.T) {
@@ -109,7 +109,7 @@ func TestEncryptAndDecryptFromFile_Sr25519(t *testing.T) {
 	file, fp := createTestFile(t)
 	defer os.Remove(fp)
 
-	kp, err := sr25519.NewKeypairFromSeed("//seed", "substrate")
+	kp, err := sr25519.NewKeypairFromSeed("//seed", 1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -134,7 +134,7 @@ func TestDecryptIncorrectType(t *testing.T) {
 	file, fp := createTestFile(t)
 	defer os.Remove(fp)
 
-	kp, err := sr25519.NewKeypairFromSeed("//seed", "substrate")
+	kp, err := sr25519.NewKeypairFromSeed("//seed", 1)
 	if err != nil {
 		t.Fatal(err)
 	}
